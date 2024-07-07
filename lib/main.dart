@@ -1,8 +1,10 @@
 import 'package:cv_page_new/app_bar_widgets.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/about_me_page.dart';
+import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -48,22 +50,28 @@ class MyApp extends StatelessWidget {
                       verticalPadding: 10,
                       widgets: [
                         AppBarButton(
-                          text: "HOME",
+                          text: "Home",
+                          iconData: IonIcons.home,
                           active: false,
                         ),
                         AppBarButton(
                           text: "Projects",
-                          iconData: Icons.production_quantity_limits,
+                          iconData: IonIcons.easel,
                           active: false,
                         ),
                         AppBarButton(
                           text: "About Me",
-                          iconData: Icons.person,
+                          iconData: IonIcons.person,
                           active: true,
                         ),
                         AppBarButton(
                           text: "Experience & Skills",
-                          iconData: Icons.production_quantity_limits,
+                          iconData: IonIcons.bar_chart,
+                          active: false,
+                        ),
+                        AppBarButton(
+                          text: "Git Updates",
+                          iconData: IonIcons.logo_github,
                           active: false,
                         ),
                       ],
@@ -76,7 +84,17 @@ class MyApp extends StatelessWidget {
                 height: 10,
               ),
               // PAGE
-              const AboutMePage()
+              const AboutMePage(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ReferenceTextButton(
+                      label: "Github", iconData: IonIcons.logo_github),
+                  SizedBox(width: 4),
+                  ReferenceTextButton(
+                      label: "LinkedIn", iconData: IonIcons.logo_linkedin)
+                ],
+              )
             ],
           ),
         ));

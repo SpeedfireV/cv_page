@@ -24,8 +24,14 @@ class _AppBarButtonState extends State<AppBarButton> {
             borderRadius: BorderRadius.circular(5),
             color: widget.active ? darkOrange : transparent),
         child: InkWell(
+          overlayColor: widget.active
+              ? WidgetStatePropertyAll(lightOrange.withOpacity(0.5))
+              : WidgetStatePropertyAll(darkBlue.withOpacity(0.15)),
           borderRadius: BorderRadius.circular(5),
           onTap: () {},
+          onHover: (value) {
+            debugPrint("Hovered App Bar Button");
+          },
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             child: Row(
@@ -36,6 +42,7 @@ class _AppBarButtonState extends State<AppBarButton> {
                         child: Icon(
                           widget.iconData,
                           color: fontColor,
+                          size: 24,
                         ),
                       )
                     : Container(),

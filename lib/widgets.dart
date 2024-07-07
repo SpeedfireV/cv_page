@@ -53,36 +53,126 @@ class TitleText extends StatelessWidget {
   }
 }
 
+class SubtitleText extends StatelessWidget {
+  const SubtitleText(this.text, {super.key});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(text, style: TextStyles.subtitleText);
+  }
+}
+
 class DescriptionText extends StatelessWidget {
   const DescriptionText(this.text, {super.key});
   final String text;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(
-        "Jestem młodym, ambitnym i pracowitym studentem telekomunikacji z nadmiarem wolnego czasu interesującym się tworzeniem aplikacji mobilnych. Przez ostatnie lata zdążyłem podjąć się pracy na Upwork oraz stworzyłem kilka aplikacji, które dały mi doświadczenie z Flutterem, Firebasem, wydawaniem aplikacji w Google Play oraz innych przydatnych umiejętności.  Chciałbym to doświadczenie przekuć w coś użytecznego i służącego innym ludziom, a także móc się przy okazji dalej rozwijać. Nie przeraża mnie, także wizja pracy w zespole, a powierzone mi zadania traktuję jako możliwość rozwoju.",
-        style: TextStyles.descriptionText);
+    return SelectableText(text, style: TextStyles.descriptionText);
   }
 }
 
 class BulletedList extends StatelessWidget {
-  const BulletedList(this.dataList, {super.key});
+  const BulletedList({required this.title, required this.dataList, super.key});
+  final String title;
   final List<String> dataList;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Text("\u2022 ${dataList[index]}",
-              style: TextStyles.descriptionText);
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 4,
-          );
-        },
-        itemCount: dataList.length);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Align(alignment: Alignment.centerLeft, child: TitleText(title)),
+        SizedBox(height: 4),
+        ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return SelectableText("\u2022 ${dataList[index]}",
+                  style: TextStyles.descriptionText);
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 8,
+              );
+            },
+            itemCount: dataList.length),
+      ],
+    );
+  }
+}
+
+class PointedList extends StatelessWidget {
+  const PointedList(
+      {super.key,
+      required this.name,
+      required this.titles,
+      required this.subtitles});
+  final String name;
+  final List<String> titles;
+  final List<String?> subtitles;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TitleText(name),
+        ),
+        SizedBox(height: 4),
+        ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: SubtitleText(titles[index])),
+                  subtitles.length - 1 >= index
+                      ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: DescriptionText(subtitles[index]!))
+                      : Container()
+                ],
+              );
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 8,
+              );
+            },
+            itemCount: titles.length),
+      ],
+    );
+  }
+}
+
+class ReferenceTextButton extends StatefulWidget {
+  const ReferenceTextButton(
+      {super.key, required this.label, required this.iconData});
+  final String label;
+  final IconData iconData;
+
+  @override
+  State<ReferenceTextButton> createState() => _ReferenceTextButtonState();
+}
+
+class _ReferenceTextButtonState extends State<ReferenceTextButton> {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: () {},
+      label: Text(widget.label, style: TextStyle(color: lightBlue)),
+      icon: Icon(widget.iconData),
+      style: TextButton.styleFrom(
+          overlayColor: darkBlue.withOpacity(0.15),
+          iconColor: lightBlue,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(standardBorderRadius))),
+    );
   }
 }
