@@ -1,6 +1,7 @@
 import 'package:cv_page_new/app_bar_widgets.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/about_me_page.dart';
+import 'package:cv_page_new/pages/git_updates_page.dart';
 import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +26,15 @@ class MyApp extends StatelessWidget {
         ),
         home: Scaffold(
           backgroundColor: Color(0xff11151C),
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Center(
+          body: ListView(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 80),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Center(
+                      child: Container(
                         child: Text(
                           currentTime,
                           textAlign: TextAlign.center,
@@ -44,60 +44,59 @@ class MyApp extends StatelessWidget {
                               fontSize: 24),
                         ),
                       ),
-                      RowWithPadding(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        elementsPadding: 24,
-                        verticalPadding: 10,
-                        widgets: [
-                          AppBarButton(
-                            text: "Home",
-                            iconData: IonIcons.home,
-                            active: false,
-                          ),
-                          AppBarButton(
-                            text: "Projects",
-                            iconData: IonIcons.easel,
-                            active: false,
-                          ),
-                          AppBarButton(
-                            text: "About Me",
-                            iconData: IonIcons.person,
-                            active: true,
-                          ),
-                          AppBarButton(
-                            text: "Experience & Skills",
-                            iconData: IonIcons.bar_chart,
-                            active: false,
-                          ),
-                          AppBarButton(
-                            text: "Git Updates",
-                            iconData: IonIcons.logo_github,
-                            active: false,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  color: white,
-                  height: 10,
-                ),
-                // PAGE
-                const ProjectsPage(),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ReferenceTextButton(
-                        label: "Github", iconData: IonIcons.logo_github),
-                    SizedBox(width: 4),
-                    ReferenceTextButton(
-                        label: "LinkedIn", iconData: IonIcons.logo_linkedin)
+                    ),
+                    RowWithPadding(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      elementsPadding: 24,
+                      verticalPadding: 10,
+                      widgets: [
+                        AppBarButton(
+                          text: "Home",
+                          iconData: IonIcons.home,
+                          active: false,
+                        ),
+                        AppBarButton(
+                          text: "Projects",
+                          iconData: IonIcons.easel,
+                          active: false,
+                        ),
+                        AppBarButton(
+                          text: "About Me",
+                          iconData: IonIcons.person,
+                          active: true,
+                        ),
+                        AppBarButton(
+                          text: "Experience & Skills",
+                          iconData: IonIcons.bar_chart,
+                          active: false,
+                        ),
+                        AppBarButton(
+                          text: "Git Updates",
+                          iconData: IonIcons.logo_github,
+                          active: false,
+                        ),
+                      ],
+                    ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              Divider(
+                color: white,
+                height: 10,
+              ),
+              // PAGE
+              const GitUpdatesPage(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ReferenceTextButton(
+                      label: "Github", iconData: IonIcons.logo_github),
+                  SizedBox(width: 4),
+                  ReferenceTextButton(
+                      label: "LinkedIn", iconData: IonIcons.logo_linkedin)
+                ],
+              )
+            ],
           ),
         ));
   }
