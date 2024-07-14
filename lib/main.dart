@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
                 height: 10,
               ),
               // PAGE
-              const GitUpdatesPage(),
+              const ProjectsPage(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
