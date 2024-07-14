@@ -22,58 +22,22 @@ class _ProjectsPageState extends State<ProjectsPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: whitish,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TitleText("Projects"),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: DescriptionText(
-                                "It's a page to show my progress in years!")),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          IonIcons.logo_firebase,
-                          color: darkOrange,
-                          size: 24,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          "Synchronized With Firebase",
-                          style: TextStyle(
-                              color: darkOrange,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          SizedBox(
+              width: double.infinity,
+              child: PageInformationCard(
+                title: "Projects",
+                subtitle: "It's a page to show my progress in years!",
+                suffixIcon: IonIcons.logo_firebase,
+                suffixIconColor: darkOrange,
+                suffixText: "Synchronized With Firebase",
+              )),
           GridView.count(
               shrinkWrap: true,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
               crossAxisCount: 2,
               childAspectRatio: 6 / 4,
-              children: [ProjectCard()]),
+              children: const [ProjectCard()]),
         ],
       ),
     );
@@ -107,7 +71,7 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +99,7 @@ class _ProjectCardState extends State<ProjectCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   SmallItalicText("For"),
                   DescriptionText("iOS & Android")
                 ],
@@ -143,7 +107,7 @@ class _ProjectCardState extends State<ProjectCard> {
               SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   SmallItalicText("Made With"),
                   Row(
                     mainAxisSize: MainAxisSize.min,

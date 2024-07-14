@@ -2,6 +2,7 @@ import 'package:cv_page_new/app_bar_widgets.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/about_me_page.dart';
 import 'package:cv_page_new/pages/git_updates_page.dart';
+import 'package:cv_page_new/pages/home_page.dart';
 import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class MyApp extends StatelessWidget {
                 height: 10,
               ),
               // PAGE
-              const ProjectsPage(),
+              const HomePage(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

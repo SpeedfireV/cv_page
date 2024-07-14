@@ -1,6 +1,7 @@
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/constants/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class RowWithPadding extends StatefulWidget {
   const RowWithPadding(
@@ -44,12 +45,20 @@ class _RowWithPaddingState extends State<RowWithPadding> {
 }
 
 class TitleText extends StatelessWidget {
-  const TitleText(this.text, {super.key});
+  const TitleText(this.text, {super.key, this.textColor, this.textAlign});
   final String text;
+  final Color? textColor;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(text, style: TextStyles.titleText);
+    return SelectableText(
+      text,
+      style: TextStyles.titleText.copyWith(
+        color: textColor,
+      ),
+      textAlign: textAlign,
+    );
   }
 }
 
@@ -94,12 +103,26 @@ class SmallItalicText extends StatelessWidget {
 }
 
 class DescriptionText extends StatelessWidget {
-  const DescriptionText(this.text, {super.key});
+  const DescriptionText(this.text,
+      {super.key, this.textColor, this.textAlign, this.notSelectable});
   final String text;
+  final Color? textColor;
+  final TextAlign? textAlign;
+  final bool? notSelectable;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(text, style: TextStyles.descriptionText);
+    return notSelectable == true
+        ? Text(
+            text,
+            style: TextStyles.descriptionText.copyWith(color: textColor),
+            textAlign: textAlign,
+          )
+        : SelectableText(
+            text,
+            style: TextStyles.descriptionText.copyWith(color: textColor),
+            textAlign: textAlign,
+          );
   }
 }
 
@@ -207,6 +230,46 @@ class _ReferenceTextButtonState extends State<ReferenceTextButton> {
   }
 }
 
+class TextButtonWithIcon extends StatefulWidget {
+  const TextButtonWithIcon(
+      {super.key,
+      required this.text,
+      required this.iconData,
+      this.iconSize,
+      required this.primaryColor});
+  final String text;
+  final IconData iconData;
+  final double? iconSize;
+  final Color primaryColor;
+
+  @override
+  State<TextButtonWithIcon> createState() => _TextButtonWithIconState();
+}
+
+class _TextButtonWithIconState extends State<TextButtonWithIcon> {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      style: TextButton.styleFrom(
+          overlayColor: widget.primaryColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+      iconAlignment: IconAlignment.end,
+      onPressed: () {},
+      label: DescriptionText(
+        widget.text,
+        textColor: widget.primaryColor,
+        notSelectable: true,
+      ),
+      icon: Icon(
+        widget.iconData,
+        color: widget.primaryColor,
+        size: widget.iconSize,
+      ),
+    );
+  }
+}
+
 class IconWithTooltip extends StatelessWidget {
   const IconWithTooltip(
       {super.key, required this.message, required this.iconData});
@@ -237,6 +300,78 @@ class GreyIcon extends StatelessWidget {
       iconData,
       size: size,
       color: grey,
+    );
+  }
+}
+
+class PageInformationCard extends StatelessWidget {
+  const PageInformationCard(
+      {super.key,
+      required this.title,
+      this.subtitle,
+      this.suffixText,
+      this.suffixIcon,
+      this.suffixIconColor,
+      this.suffixTextColor});
+  final String title;
+  final String? subtitle;
+  final String? suffixText;
+  final IconData? suffixIcon;
+  final Color? suffixIconColor;
+  final Color? suffixTextColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: whitish,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            subtitle != null
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleText(title),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: DescriptionText(subtitle!)),
+                    ],
+                  )
+                : TitleText(title),
+            Row(
+              children: [
+                suffixIcon != null
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            suffixIcon!,
+                            color: suffixIconColor ?? darkOrange,
+                            size: 24,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                        ],
+                      )
+                    : Container(),
+                suffixText != null
+                    ? Text(
+                        suffixText!,
+                        style: TextStyle(
+                            color: suffixTextColor ?? darkOrange,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16),
+                      )
+                    : Container()
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
