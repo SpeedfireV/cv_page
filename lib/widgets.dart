@@ -53,13 +53,43 @@ class TitleText extends StatelessWidget {
   }
 }
 
+class SubtitleItalicText extends StatelessWidget {
+  const SubtitleItalicText(this.text, {super.key});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(text, style: TextStyles.subtitleItalicText);
+  }
+}
+
 class SubtitleText extends StatelessWidget {
-  const SubtitleText(this.text, {super.key});
+  const SubtitleText({super.key, required this.text});
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return SelectableText(text, style: TextStyles.subtitleText);
+  }
+}
+
+class SmallText extends StatelessWidget {
+  const SmallText(this.text, {super.key});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(text, style: TextStyles.smallText);
+  }
+}
+
+class SmallItalicText extends StatelessWidget {
+  const SmallItalicText(this.text, {super.key});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(text, style: TextStyles.smallItalicText);
   }
 }
 
@@ -131,7 +161,7 @@ class PointedList extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: SubtitleText(titles[index])),
+                      child: SubtitleItalicText(titles[index])),
                   subtitles.length - 1 >= index
                       ? Align(
                           alignment: Alignment.centerLeft,
@@ -173,6 +203,40 @@ class _ReferenceTextButtonState extends State<ReferenceTextButton> {
           iconColor: lightBlue,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(standardBorderRadius))),
+    );
+  }
+}
+
+class IconWithTooltip extends StatelessWidget {
+  const IconWithTooltip(
+      {super.key, required this.message, required this.iconData});
+  final String message;
+  final IconData iconData;
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      richMessage: TextSpan(
+          text: message,
+          style: TextStyles.descriptionText.copyWith(color: white)),
+      decoration:
+          BoxDecoration(color: grey, borderRadius: BorderRadius.circular(5)),
+      preferBelow: false,
+      child: GreyIcon(iconData: iconData, size: 28),
+    );
+  }
+}
+
+class GreyIcon extends StatelessWidget {
+  const GreyIcon({super.key, required this.iconData, this.size});
+  final IconData iconData;
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      iconData,
+      size: size,
+      color: grey,
     );
   }
 }

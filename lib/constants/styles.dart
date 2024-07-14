@@ -12,6 +12,10 @@ class TextStyles {
       fontSize: 21,
       fontWeight: FontWeight.w600,
       fontStyle: FontStyle.italic);
+  static TextStyle subtitleItalicText =
+      subtitleText.copyWith(fontStyle: FontStyle.italic);
+  static TextStyle smallText = subtitleText.copyWith(fontSize: 19);
+  static TextStyle smallItalicText = subtitleItalicText.copyWith(fontSize: 19);
   static TextStyle commentText =
       TextStyle(color: grey.withAlpha(150), fontWeight: FontWeight.w500);
 }
