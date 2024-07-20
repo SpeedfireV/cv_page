@@ -4,6 +4,8 @@ import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../api/github.dart';
+
 class GitUpdatesPage extends StatefulWidget {
   const GitUpdatesPage({super.key});
 
@@ -12,13 +14,27 @@ class GitUpdatesPage extends StatefulWidget {
 }
 
 class _GitUpdatesPageState extends State<GitUpdatesPage> {
+  var githubService = GitHubService(username: "speedfirev");
+  //TODO: https://api.github.com/repos/speedfirev/cv_page/commits
+
+
+
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 300.0),
       child: ListView(
         shrinkWrap: true,
         children: [
+          FutureBuilder(future: githubService.fetchRepos(), builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              debugPrint("Done!");
+              return Text(snapshot.data.toString(), style: TextStyle(color: Colors.white),);
+            }
+            return Text("Not Yet", style: TextStyle(color: Colors.white),);
+
+          }),
           PageInformationCard(
               title: "Git Updates",
               subtitle: "It's a page to show my git commit history!",
