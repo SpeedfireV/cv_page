@@ -4,6 +4,7 @@ import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/git_updates_page.dart';
 import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -11,6 +12,7 @@ import 'package:intl/intl.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
+
   FirebaseService.initializeFirebase();
   runApp(const MyApp());
 }
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+
     var currentTime = DateFormat.Hms().format(DateTime.now());
     return MaterialApp(
         title: 'Flutter Demo',

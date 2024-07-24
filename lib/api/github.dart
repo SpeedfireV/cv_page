@@ -49,7 +49,7 @@ class GitHubService {
       List<dynamic> jsonData = jsonDecode(response.body);
       Iterable<Map<String, dynamic>> repos =
           jsonData.map((event) => event as Map<String, dynamic>);
-      print("HERE" + (repos.elementAt(0)["type"] == "PushEvent").toString());
+      print("HERE " + (repos.elementAt(0)["type"] == "PushEvent").toString());
       repos = repos.where((event) => event['type'] == "PushEvent");
       List listOfRepos = repos.toList();
 
