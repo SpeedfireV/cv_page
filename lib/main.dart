@@ -1,18 +1,18 @@
-import 'package:cv_page_new/api/github.dart';
+import 'package:cv_page_new/api/firebase.dart';
 import 'package:cv_page_new/app_bar_widgets.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/git_updates_page.dart';
 import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:intl/intl.dart';
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-
+Future main() async {
+  await dotenv.load(fileName: ".env");
+  FirebaseService.initializeFirebase();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
                 height: 10,
               ),
               // PAGE
-              const GitUpdatesPage(),
+              const ProjectsPage(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

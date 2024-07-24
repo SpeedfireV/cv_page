@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/functions.dart';
 import 'package:cv_page_new/widgets.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../api/github.dart';
+import '../utils/date_formatter.dart';
 
 class GitUpdatesPage extends StatefulWidget {
   const GitUpdatesPage({super.key});
@@ -17,24 +20,13 @@ class _GitUpdatesPageState extends State<GitUpdatesPage> {
   var githubService = GitHubService(username: "speedfirev");
   //TODO: https://api.github.com/repos/speedfirev/cv_page/commits
 
-
-
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 300.0),
       child: ListView(
         shrinkWrap: true,
         children: [
-          FutureBuilder(future: githubService.fetchRepos(), builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              debugPrint("Done!");
-              return Text(snapshot.data.toString(), style: TextStyle(color: Colors.white),);
-            }
-            return Text("Not Yet", style: TextStyle(color: Colors.white),);
-
-          }),
           PageInformationCard(
               title: "Git Updates",
               subtitle: "It's a page to show my git commit history!",
@@ -42,18 +34,31 @@ class _GitUpdatesPageState extends State<GitUpdatesPage> {
               suffixIconColor: grey,
               suffixText: "Synchronized With Github",
               suffixTextColor: grey),
-          GitUpdateCard(
-            projectNameText: "projectNameText",
-            gitCommitText: "gitCommitText",
-            publicationDateText: "publicationDateText",
-            even: isEven(0),
-          ),
-          GitUpdateCard(
-            projectNameText: "fiz-symulacja",
-            gitCommitText: "Input from file & better optimalization",
-            publicationDateText: "07.11.2024",
-            even: isEven(1),
-          )
+          FutureBuilder(
+              future: githubService.fetchEvents(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  Iterable<Map<String, dynamic>> repos = snapshot.data;
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        Map<String, dynamic> repoInfo = repos.elementAt(index);
+                        return GitUpdateCard(
+                          projectNameText: repoInfo["repo"]["name"],
+                          gitCommitText: repoInfo["payload"]["commits"][0]
+                              ["message"],
+                          publicationDateText:
+                              formatDate(repoInfo["created_at"]),
+                          even: isEven(index),
+                        );
+                      },
+                      itemCount: repos.length);
+                }
+                return Text(
+                  "Not Yet",
+                  style: TextStyle(color: Colors.white),
+                );
+              }),
         ],
       ),
     );
