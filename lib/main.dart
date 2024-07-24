@@ -9,8 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:intl/intl.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future main() async {
+  await SentryFlutter.init(
+        (options) {
+      options.dsn = 'https://72719afceaf43b616e18683b8ed85041@o4507629393870848.ingest.us.sentry.io/4507658881925120';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 1.0;
+      // The sampling rate for profiling is relative to tracesSampleRate
+      // Setting to 1.0 will profile 100% of sampled transactions:
+      options.profilesSampleRate = 1.0;
+    },
+
+    appRunner: () => runApp(MyApp()),
+  );
   await dotenv.load(fileName: ".env");
 
   FirebaseService.initializeFirebase();
@@ -21,6 +35,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+
 
     var currentTime = DateFormat.Hms().format(DateTime.now());
     return MaterialApp(

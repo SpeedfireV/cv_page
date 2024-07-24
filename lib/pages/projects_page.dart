@@ -1,10 +1,9 @@
+import 'package:cv_page_new/api/firebase.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/constants/styles.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:material_symbols_icons/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class ProjectsPage extends StatefulWidget {
@@ -31,13 +30,22 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 suffixIconColor: darkOrange,
                 suffixText: "Synchronized With Firebase",
               )),
-          GridView.count(
-              shrinkWrap: true,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              crossAxisCount: 2,
-              childAspectRatio: 6 / 4,
-              children: const [ProjectCard()]),
+          FutureBuilder(future: FirebaseService.getProjects(), builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+
+              return GridView.builder(
+                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 6/4),
+                itemCount: snapshot.data!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ProjectCard();
+                  });
+
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
+
         ],
       ),
     );
