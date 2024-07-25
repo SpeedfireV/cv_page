@@ -1,6 +1,9 @@
 import 'package:cv_page_new/api/firebase.dart';
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/constants/styles.dart';
+import 'package:cv_page_new/models/firebase.dart';
+import 'package:cv_page_new/utils/date_formatter.dart';
+import 'package:cv_page_new/utils/text_formatter.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -31,14 +34,17 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 suffixText: "Synchronized With Firebase",
               )),
           FutureBuilder(future: FirebaseService.getProjects(), builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
             if (snapshot.connectionState == ConnectionState.done) {
 
               return GridView.builder(
                   gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 6/4),
-                itemCount: snapshot.data!.length,
+                itemCount: snapshot.data != null ? snapshot.data!.length : 3,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ProjectCard();
+                    return ProjectCard(project: snapshot.data![index],);
                   });
 
             } else {
@@ -53,7 +59,10 @@ class _ProjectsPageState extends State<ProjectsPage> {
 }
 
 class ProjectCard extends StatefulWidget {
-  const ProjectCard({super.key});
+  const ProjectCard({super.key, required this.project});
+  final FirebaseProject project;
+
+
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
@@ -62,6 +71,7 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
+
     return Card(
       color: lightOrange,
       shape: RoundedRectangleBorder(
@@ -79,37 +89,37 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children:  [
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleText(
-                        'Gardener',
+                        widget.project.title,
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           GreyIcon(iconData: IonIcons.analytics),
                           SizedBox(width: 4),
-                          DescriptionText("In Progress"),
+                          DescriptionText(widget.project.status),
                         ],
                       ),
                     ],
                   ),
-                  DescriptionText("14.03.2024 -")
+                  DescriptionText(durationDate(widget.project.initDate!, widget.project.endDate))
                 ],
               ),
               SizedBox(height: 16),
               DescriptionText(
-                  "That's a gardening project for your plants to flourish!"),
+                  widget.project.description),
               Expanded(child: Container()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   SmallItalicText("For"),
-                  DescriptionText("iOS & Android")
+                  DescriptionText(platformsToString(widget.project.platforms))
                 ],
               ),
               SizedBox(height: 4),

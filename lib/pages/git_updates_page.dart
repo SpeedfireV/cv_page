@@ -48,7 +48,7 @@ class _GitUpdatesPageState extends State<GitUpdatesPage> {
                           gitCommitText: repoInfo["payload"]["commits"][0]
                               ["message"],
                           publicationDateText:
-                              formatDate(repoInfo["created_at"]),
+                              formatDateWithMinutes(repoInfo["created_at"]),
                           even: isEven(index),
                         );
                       },

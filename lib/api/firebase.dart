@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../firebase_options.dart';
-
+import 'dart:developer';
 class FirebaseService {
   static Future initializeFirebase() async {
     await Firebase.initializeApp(
@@ -23,17 +23,16 @@ class FirebaseService {
     //   );
     // }
     FirebaseFirestore db = FirebaseFirestore.instance;
-    await db.collection("projects").get().then((event) {
+    List<FirebaseProject> projects =  await db.collection("projects").get().then((event) {
       List<FirebaseProject> projects = [];
       for (var doc in event.docs) {
-        print("Firebase data:" +doc.data().keys.toString());
-        print("From Json: ${(FirebaseProject.fromJson(doc.data())).toString()}");
-       projects.add(FirebaseProject.fromJson(doc.data()));
+        FirebaseProject project = FirebaseProject.fromJson(doc.data());
+        projects.add(project);
       }
       return projects;
     }).onError((error, errorStacktrace) {
       throw errorStacktrace;
     });
-    return null;
+    return projects;
   }
 }

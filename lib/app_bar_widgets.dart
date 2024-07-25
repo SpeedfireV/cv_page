@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 
 class AppBarButton extends StatefulWidget {
   const AppBarButton(
-      {super.key, this.iconData, required this.text, required this.active});
+      {super.key,
+      this.iconData,
+      required this.text,
+      required this.active,
+      required this.function});
   final IconData? iconData;
   final String text;
   final bool active;
+  final Function() function;
 
   @override
   State<AppBarButton> createState() => _AppBarButtonState();
@@ -28,7 +33,7 @@ class _AppBarButtonState extends State<AppBarButton> {
               ? WidgetStatePropertyAll(lightOrange.withOpacity(0.5))
               : WidgetStatePropertyAll(darkBlue.withOpacity(0.15)),
           borderRadius: BorderRadius.circular(5),
-          onTap: () {},
+          onTap: widget.function,
           onHover: (value) {
             debugPrint("Hovered App Bar Button");
           },
