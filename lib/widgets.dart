@@ -1,7 +1,6 @@
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/constants/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class RowWithPadding extends StatefulWidget {
   const RowWithPadding(
@@ -206,9 +205,13 @@ class PointedList extends StatelessWidget {
 
 class ReferenceTextButton extends StatefulWidget {
   const ReferenceTextButton(
-      {super.key, required this.label, required this.iconData});
+      {super.key,
+      required this.label,
+      required this.iconData,
+      required this.function});
   final String label;
   final IconData iconData;
+  final Function() function;
 
   @override
   State<ReferenceTextButton> createState() => _ReferenceTextButtonState();
@@ -218,7 +221,7 @@ class _ReferenceTextButtonState extends State<ReferenceTextButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      onPressed: () {},
+      onPressed: widget.function,
       label: Text(widget.label, style: TextStyle(color: lightBlue)),
       icon: Icon(widget.iconData),
       style: TextButton.styleFrom(
@@ -236,11 +239,13 @@ class TextButtonWithIcon extends StatefulWidget {
       required this.text,
       required this.iconData,
       this.iconSize,
-      required this.primaryColor});
+      required this.primaryColor,
+      required this.function});
   final String text;
   final IconData iconData;
   final double? iconSize;
   final Color primaryColor;
+  final Function() function;
 
   @override
   State<TextButtonWithIcon> createState() => _TextButtonWithIconState();
@@ -255,7 +260,7 @@ class _TextButtonWithIconState extends State<TextButtonWithIcon> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
       iconAlignment: IconAlignment.end,
-      onPressed: () {},
+      onPressed: widget.function,
       label: DescriptionText(
         widget.text,
         textColor: widget.primaryColor,

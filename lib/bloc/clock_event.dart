@@ -1,4 +1,4 @@
-part of 'clock_bloc.dart';
+// time_event.dart
+abstract class ClockEvent {}
 
-@immutable
-sealed class ClockEvent {}
+class UpdateClock extends ClockEvent {}

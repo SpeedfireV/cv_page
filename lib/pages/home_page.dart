@@ -1,8 +1,8 @@
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/git_updates_page.dart';
-import 'package:cv_page_new/pages/projects_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 300.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 16),
           Row(
@@ -40,15 +41,47 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center,
             ),
           ),
+          SizedBox(height: 48),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TitleText("My Latest Project"),
+              TitleText(
+                "My Latest Git Update",
+                textColor: whitish,
+              ),
               TextButtonWithIcon(
-                  text: "See More",
-                  iconData: Icons.arrow_forward_ios,
-                  iconSize: 16,
-                  primaryColor: whitish),
+                text: "See More",
+                iconData: Icons.arrow_forward_ios,
+                iconSize: 16,
+                primaryColor: whitish,
+                function: () => GoRouter.of(context).goNamed("gitUpdates"),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 100,
+            width: double.infinity,
+            child: GitUpdateCard(
+                projectNameText: "projectNameText",
+                gitCommitText: "gitCommitText",
+                publicationDateText: "publicationDateText",
+                even: true),
+          ),
+          SizedBox(height: 64),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TitleText(
+                "Recently Finished Project",
+                textColor: whitish,
+              ),
+              TextButtonWithIcon(
+                text: "See More Projects",
+                iconData: Icons.arrow_forward_ios,
+                iconSize: 16,
+                primaryColor: whitish,
+                function: () => GoRouter.of(context).goNamed("gitUpdates"),
+              ),
             ],
           ),
           SizedBox(

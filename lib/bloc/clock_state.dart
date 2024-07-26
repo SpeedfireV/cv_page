@@ -1,6 +1,10 @@
-part of 'clock_bloc.dart';
+// time_state.dart
+import 'package:intl/intl.dart';
 
-@immutable
-sealed class ClockState {}
+class ClockState {
+  final DateTime currentTime;
+  final String formattedTime;
 
-final class ClockInitial extends ClockState {}
+  ClockState({required this.currentTime})
+      : formattedTime = DateFormat('HH:mm:ss').format(currentTime);
+}

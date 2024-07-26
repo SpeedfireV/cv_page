@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/functions.dart';
 import 'package:cv_page_new/widgets.dart';
@@ -84,32 +82,30 @@ class GitUpdateCard extends StatefulWidget {
 class _GitUpdateCardState extends State<GitUpdateCard> {
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: SizedBox(
-        width: 300,
-        height: 90,
-        child: Card(
-          color: widget.even ? lightOrange : lightBlue,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TitleText(widget.projectNameText),
-                SizedBox(width: 16),
-                VerticalDivider(
-                  color: whitish,
-                ),
-                DescriptionText(widget.gitCommitText),
-                Expanded(child: Container()),
-                Icon(
-                  IonIcons.time,
-                  color: grey,
-                ),
-                SizedBox(width: 8),
-                DescriptionText(widget.publicationDateText)
-              ],
-            ),
+    return SizedBox(
+      width: 300,
+      height: 90,
+      child: Card(
+        color: widget.even ? lightOrange : lightBlue,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TitleText(widget.projectNameText),
+              SizedBox(width: 16),
+              VerticalDivider(
+                color: whitish,
+              ),
+              DescriptionText(widget.gitCommitText),
+              Expanded(child: Container()),
+              Icon(
+                IonIcons.time,
+                color: grey,
+              ),
+              SizedBox(width: 8),
+              DescriptionText(widget.publicationDateText)
+            ],
           ),
         ),
       ),
