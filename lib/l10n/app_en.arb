@@ -1,0 +1,83 @@
+{
+  "homePageTitle": "Nice To See You Here!",
+  "@homePageTitle": {
+  "description": "The conventional newborn programmer greeting"
+  },
+  "homePageDescription": "Look around and if you are interested you are free to contact me at:\n grzegorz.niespodziany@gmail.com or 506620208",
+  "@homePageDescription": {
+    "description": "Home Page Description"
+  },
+  "myLatestGitUpdate" : "My Latest Git Update",
+  "@myLatestGitUpdate": {
+    "description": "My Latest Git Update"
+  },
+  "recentlyFinishedProject" : "Recently Finished Project",
+  "@recentlyFinishedProject": {
+    "description" : "Recently Finished Project"
+  },
+  "seeMore" : "See More",
+  "@seeMore" : {
+    "description" : "See More"
+  },
+  "homeButton" : "Home",
+  "@homeButton" : {
+    "description" : "Home Button Text"
+  },
+  "projectsButton" : "Projects",
+  "@projectsButton" : {
+    "description" : "Projects Button Page"
+  },
+  "aboutMeButton" : "About Me",
+  "@aboutMeButton" : {
+    "description" : "About Me Button Page"
+  },
+  "gitUpdates" : "Git Updates",
+  "@gitUpdates" : {
+    "description" : "Git Updates Button Page"
+  },
+  "projects" : "Projects",
+  "@projects" : {
+    "description" : "Projects"
+  },
+  "projectsDescriptionProjectsPage" : "It's a page to show my progress in years!",
+  "@projectsDescriptionProjectsPage" : {
+    "description" : "Description Of Projects Page"
+  },
+  "synchronizedWithFirebase" : "Synchronized With Firebase",
+  "@synchronizedWithFirebase" : {
+    "description" : "Synchronized With Firebase"
+  },
+  "forDesc" : "For",
+  "@forDesc" : {
+    "description" : "Developed Platforms"
+  },
+  "madeWith" : "Made With",
+  "@madeWith" : {
+    "description" : "Used Technologies"
+  },
+  "aboutMeAboutMe" : "About Me",
+  "@aboutMeAboutMe" : {
+    "description" : "Main Title"
+  },
+  "aboutMeDescription" : "Jestem młodym, ambitnym i pracowitym studentem telekomunikacji z nadmiarem wolnego czasu interesującym się tworzeniem aplikacji mobilnych. Przez ostatnie lata zdążyłem podjąć się pracy na Upwork oraz stworzyłem kilka aplikacji, które dały mi doświadczenie z Flutterem, Firebasem, wydawaniem aplikacji w Google Play oraz innych przydatnych umiejętności.  Chciałbym to doświadczenie przekuć w coś użytecznego i służącego innym ludziom, a także móc się przy okazji dalej rozwijać. Nie przeraża mnie, także wizja pracy w zespole, a powierzone mi zadania traktuję jako możliwość rozwoju.",
+  "@aboutMeDescription" : {
+    "description" : "My Description"
+  },
+  "skills" : "Skills",
+  "@skills" : {
+    "description" : "Skills"
+  },
+  "education" : "Education",
+  "@education" : {
+    "description" : "Education"
+  },
+  "gitUpdatesPageDescription" : "It's a page to show my git commit history!",
+  "@gitUpdatesPageDescription" : {
+    "description" : "Git Updates Page Description"
+  },
+  "gitUpdatesPageSynchronized" : "Synchronized With Github",
+  "@gitUpdatesPageSynchronized" : {
+    "description" : "Git Updates Page Synchronization"
+  }
+
+}

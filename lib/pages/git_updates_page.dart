@@ -6,6 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 
 import '../api/github.dart';
 import '../utils/date_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GitUpdatesPage extends StatefulWidget {
   const GitUpdatesPage({super.key});
@@ -26,11 +27,12 @@ class _GitUpdatesPageState extends State<GitUpdatesPage> {
         shrinkWrap: true,
         children: [
           PageInformationCard(
-              title: "Git Updates",
-              subtitle: "It's a page to show my git commit history!",
+              title: AppLocalizations.of(context)!.gitUpdates,
+              subtitle: AppLocalizations.of(context)!.gitUpdatesPageDescription,
               suffixIcon: IonIcons.logo_github,
               suffixIconColor: grey,
-              suffixText: "Synchronized With Github",
+              suffixText:
+                  AppLocalizations.of(context)!.gitUpdatesPageSynchronized,
               suffixTextColor: grey),
           FutureBuilder(
               future: githubService.fetchEvents(),

@@ -6,6 +6,7 @@ import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../app_bar_widgets.dart';
 import '../constants/colors.dart';
@@ -23,6 +24,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
+    var appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
         backgroundColor: darkGrey,
         body: FooterView(
@@ -53,7 +55,7 @@ class _HeaderState extends State<Header> {
                     verticalPadding: 10,
                     widgets: [
                       AppBarButton(
-                        text: "Home",
+                        text: appLocalizations.homeButton,
                         iconData: IonIcons.home,
                         active: widget.navigationShell.currentIndex == 0,
                         function: () {
@@ -61,32 +63,32 @@ class _HeaderState extends State<Header> {
                         },
                       ),
                       AppBarButton(
-                          text: "Projects",
+                          text: appLocalizations.projectsButton,
                           iconData: IonIcons.easel,
                           active: widget.navigationShell.currentIndex == 1,
                           function: () {
                             widget.navigationShell.goBranch(1);
                           }),
                       AppBarButton(
-                          text: "About Me",
+                          text: appLocalizations.aboutMeButton,
                           iconData: IonIcons.person,
                           active: widget.navigationShell.currentIndex == 2,
                           function: () {
                             widget.navigationShell.goBranch(2);
                           }),
+                      // AppBarButton(
+                      //     text: "Experience & Skills",
+                      //     iconData: IonIcons.bar_chart,
+                      //     active: widget.navigationShell.currentIndex == 3,
+                      //     function: () {
+                      //       widget.navigationShell.goBranch(3);
+                      //     }),
                       AppBarButton(
-                          text: "Experience & Skills",
-                          iconData: IonIcons.bar_chart,
+                          text: appLocalizations.gitUpdates,
+                          iconData: IonIcons.logo_github,
                           active: widget.navigationShell.currentIndex == 3,
                           function: () {
                             widget.navigationShell.goBranch(3);
-                          }),
-                      AppBarButton(
-                          text: "Git Updates",
-                          iconData: IonIcons.logo_github,
-                          active: widget.navigationShell.currentIndex == 4,
-                          function: () {
-                            widget.navigationShell.goBranch(4);
                           }),
                     ],
                   ),
@@ -97,6 +99,7 @@ class _HeaderState extends State<Header> {
               color: whitish,
               height: 10,
             ),
+            SizedBox(height: 8),
             widget.navigationShell
           ],
           footer: Footer(backgroundColor: darkGrey, child: CustomFooter()),

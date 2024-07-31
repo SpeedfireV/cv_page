@@ -1,0 +1,22 @@
+{
+  "homePageTitle": "Miło Cię Widzieć!",
+  "homePageDescription": "Rozejrzyj się, a jeśli jesteś zainteresowany, możesz się ze mną skontaktować pod adresem:\n grzegorz.niespodziany@gmail.com lub 506620208",
+  "myLatestGitUpdate": "Moja Najnowsza Aktualizacja Git",
+  "recentlyFinishedProject": "Niedawno Ukończony Projekt",
+  "seeMore": "Zobacz Więcej",
+  "homeButton": "Strona Główna",
+  "projectsButton": "Projekty",
+  "aboutMeButton": "O Mnie",
+  "gitUpdates": "Aktualizacje Git",
+  "projects": "Projekty",
+  "projectsDescriptionProjectsPage": "To strona, która pokazuje mój rozwój na przestrzeni lat!",
+  "synchronizedWithFirebase": "Zsynchronizowane z Firebase",
+  "forDesc": "Dla",
+  "madeWith": "Stworzone za pomocą",
+  "aboutMeAboutMe": "O Mnie",
+  "aboutMeDescription": "Jestem młodym, ambitnym i pracowitym studentem telekomunikacji z nadmiarem wolnego czasu interesującym się tworzeniem aplikacji mobilnych. Przez ostatnie lata zdążyłem podjąć się pracy na Upwork oraz stworzyłem kilka aplikacji, które dały mi doświadczenie z Flutterem, Firebasem, wydawaniem aplikacji w Google Play oraz innych przydatnych umiejętności. Chciałbym to doświadczenie przekuć w coś użytecznego i służącego innym ludziom, a także móc się przy okazji dalej rozwijać. Nie przeraża mnie, także wizja pracy w zespole, a powierzone mi zadania traktuję jako możliwość rozwoju.",
+  "skills": "Umiejętności",
+  "education": "Edukacja",
+  "gitUpdatesPageDescription": "To strona, która pokazuje historię moich commitów na GitHubie!",
+  "gitUpdatesPageSynchronized": "Zsynchronizowane z GitHubem"
+}

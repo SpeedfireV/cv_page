@@ -3,6 +3,7 @@ import 'package:cv_page_new/constants/styles.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutMePage extends StatefulWidget {
   const AboutMePage({super.key});
@@ -20,7 +21,6 @@ class _AboutMePageState extends State<AboutMePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 50),
           Container(
             decoration: BoxDecoration(
                 color: darkOrange,
@@ -31,7 +31,7 @@ class _AboutMePageState extends State<AboutMePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(standardBorderRadius),
                     child: const Image(
                         height: 150,
                         image: AssetImage("lib/assets/images/profile.jpg"))),
@@ -59,11 +59,11 @@ class _AboutMePageState extends State<AboutMePage> {
                   SizedBox(height: 16),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: TitleText("About Me"),
+                    child:
+                        TitleText(AppLocalizations.of(context)!.aboutMeAboutMe),
                   ),
                   DescriptionText(
-                    "Jestem młodym, ambitnym i pracowitym studentem telekomunikacji z nadmiarem wolnego czasu interesującym się tworzeniem aplikacji mobilnych. Przez ostatnie lata zdążyłem podjąć się pracy na Upwork oraz stworzyłem kilka aplikacji, które dały mi doświadczenie z Flutterem, Firebasem, wydawaniem aplikacji w Google Play oraz innych przydatnych umiejętności.  Chciałbym to doświadczenie przekuć w coś użytecznego i służącego innym ludziom, a także móc się przy okazji dalej rozwijać. Nie przeraża mnie, także wizja pracy w zespole, a powierzone mi zadania traktuję jako możliwość rozwoju.",
-                  ),
+                      AppLocalizations.of(context)!.aboutMeDescription),
                   SizedBox(height: 16),
                   MasonryGridView.builder(
                     crossAxisSpacing: 16,
@@ -75,23 +75,23 @@ class _AboutMePageState extends State<AboutMePage> {
                             crossAxisCount: 2),
                     itemCount: 3,
                     itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          index % 2 == 0
-                              ? BulletedList(title: "Skills", dataList: [
+                      return index % 2 == 0
+                          ? BulletedList(
+                              title: AppLocalizations.of(context)!.skills,
+                              dataList: [
                                   "2-letnie doświadczenie we Flutterze (w tym znajomość bibliotek flutter_hooks, Riverpod, Hive, Freezed i innch)",
                                   "Znajomość środowiska Git"
                                 ])
-                              : PointedList(name: "Edukacja", titles: [
+                          : PointedList(
+                              name: AppLocalizations.of(context)!.education,
+                              titles: [
                                   "Politechnika Warszawska",
                                   "Członkostwo w kole naukowym Smart City PW"
-                                ], subtitles: [
+                                ],
+                              subtitles: [
                                   "Telekomunikacja - I Rok, II. Semestr\n11.2023 - Obecnie",
                                   "11.2023 - Obecnie"
-                                ])
-                        ],
-                      );
+                                ]);
                     },
                   ),
                   SizedBox(height: 24),

@@ -2,6 +2,7 @@ import 'package:cv_page_new/constants/colors.dart';
 import 'package:cv_page_new/pages/git_updates_page.dart';
 import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,18 +15,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var appLocalizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 300.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: TitleText(
-                  "Nice To See You Here!",
+                  appLocalizations.homePageTitle,
                   textColor: whitish,
                   textAlign: TextAlign.center,
                 ),
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 100.0),
             child: DescriptionText(
-              "Look around and if you are interested you are free to contact me at:\n grzegorz.niespodziany@gmail.com or 506620208",
+              appLocalizations.homePageDescription,
               textColor: whitish,
               textAlign: TextAlign.center,
             ),
@@ -46,11 +48,11 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TitleText(
-                "My Latest Git Update",
+                appLocalizations.myLatestGitUpdate,
                 textColor: whitish,
               ),
               TextButtonWithIcon(
-                text: "See More",
+                text: appLocalizations.seeMore,
                 iconData: Icons.arrow_forward_ios,
                 iconSize: 16,
                 primaryColor: whitish,
@@ -72,11 +74,11 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TitleText(
-                "Recently Finished Project",
+                appLocalizations.recentlyFinishedProject,
                 textColor: whitish,
               ),
               TextButtonWithIcon(
-                text: "See More Projects",
+                text: appLocalizations.seeMore,
                 iconData: Icons.arrow_forward_ios,
                 iconSize: 16,
                 primaryColor: whitish,

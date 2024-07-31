@@ -8,6 +8,7 @@ import 'package:cv_page_new/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -27,31 +28,40 @@ class _ProjectsPageState extends State<ProjectsPage> {
           SizedBox(
               width: double.infinity,
               child: PageInformationCard(
-                title: "Projects",
-                subtitle: "It's a page to show my progress in years!",
+                title: AppLocalizations.of(context)!.projects,
+                subtitle: AppLocalizations.of(context)!
+                    .projectsDescriptionProjectsPage,
                 suffixIcon: IonIcons.logo_firebase,
                 suffixIconColor: darkOrange,
-                suffixText: "Synchronized With Firebase",
+                suffixText:
+                    AppLocalizations.of(context)!.synchronizedWithFirebase,
               )),
-          FutureBuilder(future: FirebaseService.getProjects(), builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
-
-              return GridView.builder(
-                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 6/4),
-                itemCount: snapshot.data != null ? snapshot.data!.length : 3,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ProjectCard(project: snapshot.data![index],);
-                  });
-
-            } else {
-              return CircularProgressIndicator();
-            }
-          }),
-
+          FutureBuilder(
+              future: FirebaseService.getProjects(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 12,
+                              crossAxisSpacing: 12,
+                              childAspectRatio: 6 / 4),
+                      itemCount:
+                          snapshot.data != null ? snapshot.data!.length : 3,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ProjectCard(
+                          project: snapshot.data![index],
+                        );
+                      });
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
         ],
       ),
     );
@@ -62,8 +72,6 @@ class ProjectCard extends StatefulWidget {
   const ProjectCard({super.key, required this.project});
   final FirebaseProject project;
 
-
-
   @override
   State<ProjectCard> createState() => _ProjectCardState();
 }
@@ -71,6 +79,7 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
+    var appLocalizations = AppLocalizations.of(context)!;
 
     return Card(
       color: lightOrange,
@@ -89,7 +98,7 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:  [
+                children: [
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,26 +116,26 @@ class _ProjectCardState extends State<ProjectCard> {
                       ),
                     ],
                   ),
-                  DescriptionText(durationDate(widget.project.initDate!, widget.project.endDate))
+                  DescriptionText(durationDate(
+                      widget.project.initDate!, widget.project.endDate))
                 ],
               ),
               SizedBox(height: 16),
-              DescriptionText(
-                  widget.project.description),
+              DescriptionText(widget.project.description),
               Expanded(child: Container()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SmallItalicText("For"),
+                  SmallItalicText(appLocalizations.forDesc),
                   DescriptionText(platformsToString(widget.project.platforms))
                 ],
               ),
               SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  SmallItalicText("Made With"),
+                children: [
+                  SmallItalicText(appLocalizations.madeWith),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
